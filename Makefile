@@ -22,7 +22,7 @@ generate-tables:
 generate-fixtures:
 	php bin/console doctrine:fixtures:load --no-interaction
 
-start: install create-database
+start: install database
 	php -S localhost:8000 -t public
 
 symfony-version:
