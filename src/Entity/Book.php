@@ -26,6 +26,9 @@ class Book
     #[ORM\ManyToOne(inversedBy: 'books')]
     private ?User $is_borrowed = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $author = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Book
     public function setIsBorrowed(?User $is_borrowed): static
     {
         $this->is_borrowed = $is_borrowed;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }

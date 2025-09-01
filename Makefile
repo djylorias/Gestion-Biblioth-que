@@ -1,4 +1,4 @@
-.PHONY: install start create-database
+.PHONY: install start database
 
 .DEFAULT_GOAL: start
 
@@ -14,10 +14,10 @@ create-database:
 	php bin/console doctrine:database:create
 
 generate-migrations:
-	php bin/console make:migration
+	php bin/console make:migration --no-interaction
 
 generate-tables:
-	php bin/console doctrine:migrations:migrate
+	php bin/console doctrine:migrations:migrate --no-interaction
 
 generate-fixtures:
 	php bin/console doctrine:fixtures:load --no-interaction
@@ -27,3 +27,5 @@ start: install create-database
 
 symfony-version:
 	php bin/console --version
+
+database: create-database generate-migrations generate-tables generate-fixtures

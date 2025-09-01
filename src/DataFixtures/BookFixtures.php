@@ -33,6 +33,7 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
         for($i = 1; $i <= $count; $i++) {
             $book = (new Book())
                 ->setTitle($this->faker->sentence(3))
+                ->setAuthor($this->faker->name)
                 ->setSynopsis($this->faker->paragraph)
                 ->setNbPages($this->faker->numberBetween(100, 500))
                 ->setIsBorrowed($this->getRandomUser());
