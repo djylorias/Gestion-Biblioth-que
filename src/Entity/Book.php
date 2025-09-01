@@ -93,4 +93,13 @@ class Book
 
         return $this;
     }
+
+    // Return HTML version of the book availability status
+    public function availability(): string
+    {
+        if($this->is_borrowed) {
+            return '<span class="text-red-700">Emprunté par ' . $this->is_borrowed->getName() . '</span>';
+        }
+        return '<span class="text-green-700">Disponible</span>';
+    }
 }

@@ -4,6 +4,15 @@
 
 {% block body %}
 
-    <h1>Bienvenue dans le gestionnaire de votre bibliothèque !</h1>
+    <div class="p-8 items-center">
+        <h1>Bienvenue dans le gestionnaire de votre bibliothèque !</h1>
+        <br><br>
+        <h2 class="font-bold">Voici la liste des livres existants :</h2>
+        <ul>
+            {% for book in books %}
+                <li>{{ book.title }} - {{ book.author }} - {{ book.availability()|raw }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}
