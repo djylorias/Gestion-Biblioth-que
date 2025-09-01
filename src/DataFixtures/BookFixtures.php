@@ -6,15 +6,15 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use App\Entity\Book;
-use App\Entity\User;
-use App\DataFixtures\UserFixtures;
+use App\Entity\Subscriber;
+use App\DataFixtures\SubscriberFixtures;
 use Faker\Factory;
 
 class BookFixtures extends Fixture implements DependentFixtureInterface
 {
 
     private $faker;
-    private $users;
+    private $subscribers;
 
     public function __construct() {
         $this->faker = Factory::create('fr_FR');
@@ -22,7 +22,7 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $this->users = $manager->getRepository(User::class)->findAll();
+        $this->subscribers = $manager->getRepository(Subscriber::class)->findAll();
         $this->generateBooks(50, $manager);
         $manager->flush();
     }
@@ -36,16 +36,16 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
                 ->setAuthor($this->faker->name)
                 ->setSynopsis($this->faker->paragraph)
                 ->setNbPages($this->faker->numberBetween(100, 500))
-                ->setIsBorrowed($this->getRandomUser());
+                ->setIsBorrowed($this->getRandomSubscriber());
             $manager->persist($book);
         }
     }
 
-    // Get a random user or null (50% chance)
-    private function getRandomUser(): ?User
+    // Get a random subscriber or null (50% chance)
+    private function getRandomSubscriber(): ?Subscriber
     {
         if($this->faker->boolean(50)) {
-            return $this->users[array_rand($this->users)];
+            return $this->subscribers[array_rand($this->subscribers)];
         }
         return null;
     }
@@ -53,7 +53,7 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            UserFixtures::class,
+            SubscriberFixtures::class,
         ];
     }
 

@@ -24,7 +24,7 @@ class Book
     private ?int $nb_pages = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
-    private ?User $is_borrowed = null;
+    private ?Subscriber $is_borrowed = null;
 
     #[ORM\Column(length: 255)]
     private ?string $author = null;
@@ -70,12 +70,12 @@ class Book
         return $this;
     }
 
-    public function getIsBorrowed(): ?User
+    public function getIsBorrowed(): ?Subscriber
     {
         return $this->is_borrowed;
     }
 
-    public function setIsBorrowed(?User $is_borrowed): static
+    public function setIsBorrowed(?Subscriber $is_borrowed): static
     {
         $this->is_borrowed = $is_borrowed;
 

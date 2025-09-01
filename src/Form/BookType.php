@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Book;
-use App\Entity\User;
+use App\Entity\Subscriber;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +20,7 @@ class BookType extends AbstractType
             ->add('nb_pages')
             ->add('author')
             ->add('is_borrowed', EntityType::class, [
-                'class' => User::class,
+                'class' => Subscriber::class,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
             ])
