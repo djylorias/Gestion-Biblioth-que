@@ -13,6 +13,15 @@ use App\Entity\Book;
 
 final class BookController extends AbstractController
 {
+
+    #[Route('/book/{id}', name:'book.show')]
+    public function show(Book $book): Response
+    {
+        return $this->render('book/show.html.twig', [
+            'book' => $book
+        ]);
+    }
+
     #[Route('/book/edit/{id}', name:'book.edit')]
     public function edit(Book $book, Request $request, EntityManagerInterface $em): Response
     {
