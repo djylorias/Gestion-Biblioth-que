@@ -23,6 +23,8 @@ class BookType extends AbstractType
                 'class' => Subscriber::class,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
+                'placeholder' => 'Available',
+                'required' => false,
             ])
             ->add('save', SubmitType::class)
         ;
