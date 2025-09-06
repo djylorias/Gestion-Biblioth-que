@@ -15,7 +15,7 @@ final class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->findAll();
+        $books = $bookRepository->getSortedBooks();
         return $this->render('home/index.html.twig', [
             'books' => $books,
         ]);
