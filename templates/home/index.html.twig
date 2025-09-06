@@ -4,10 +4,9 @@
 
 {% block body %}
 
-    <div class="flex flex-col">
+    <div class="flex flex-col items-center">
         <h1>Bienvenue dans le gestionnaire de votre bibliothèque ! Cliquez sur le titre d'un livre pour le visualiser.</h1>
         <br><br>
-        <h2 class="font-bold">Voici la liste des livres existants :</h2>
         <div class="flex flex-col items-center">
             <twig:Books:Table :books="books" />
         </div> 

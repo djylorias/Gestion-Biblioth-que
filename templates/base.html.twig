@@ -12,7 +12,13 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body class="p-8">
+    <body class="p-4">
+        <header class="mx-4 mb-2 pb-2 border-b-2 border-gray-300 flex flex-row place-content-between">
+            <h1 class="text-2xl font-bold">My Book Library</h1>
+            <nav>
+                <a href="{{ path('app_home') }}" class="mr-4 text-xl hover:underline font-semibold">Livres</a>
+            </nav>
+        </header>
         {% block body %}{% endblock %}
     </body>
 </html>
