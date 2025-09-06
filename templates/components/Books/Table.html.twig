@@ -1,0 +1,12 @@
+<table {{ attributes.defaults({class: 'max-w-2xl'}) }}>
+    <twig:table:head :headers="['Titre', 'Auteur', 'Disponibilité']" />
+    <tbody>
+        {% for book in books %}
+            <tr class="border-b-1 border-gray-300 py-2">
+                <td class="p-1"><a href="{{ path('book.show', { 'id': book.id }) }}">{{ book.title }}</a></td>
+                <td class="p-1">{{ book.author }}</td>
+                <td class="p-1">{{ book.availability()|raw }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
