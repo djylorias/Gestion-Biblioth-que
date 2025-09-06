@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\BookRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book
@@ -26,6 +27,10 @@ class Book
     #[ORM\ManyToOne(inversedBy: 'books')]
     private ?Subscriber $is_borrowed = null;
 
+    #[Assert\Regex(
+        pattern: "/^[\p{L}\s\-']+$/u",
+        message: "Le nom de l’auteur ne doit contenir que des lettres, espaces, tirets ou apostrophes."
+    )]
     #[ORM\Column(length: 255)]
     private ?string $author = null;
 
