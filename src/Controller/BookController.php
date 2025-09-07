@@ -21,6 +21,11 @@ final class BookController extends AbstractController
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
+        
+        if($form->getClickedButton() && $form->getClickedButton()->getName() === 'cancel') {
+            return $this->redirectToRoute('app_home');
+        }
+        
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($book);
             $em->flush();
