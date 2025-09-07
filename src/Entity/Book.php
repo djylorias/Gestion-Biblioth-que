@@ -15,21 +15,25 @@ class Book
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Le titre doit être renseigné.")]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[Assert\NotBlank(message: "Le synopsis doit être renseigné.")]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $synopsis = null;
 
+    #[Assert\NotBlank(message: "Le nombre de pages doit être renseigné.")]
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $nb_pages = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
     private ?Subscriber $is_borrowed = null;
 
+    #[Assert\NotBlank(message: "Le nom de l’auteur doit être renseigné.")]
     #[Assert\Regex(
-        pattern: "/^[\p{L}\s\-']+$/u",
-        message: "Le nom de l’auteur ne doit contenir que des lettres, espaces, tirets ou apostrophes."
+        pattern: "/^[\p{L}\s\-]+$/u",
+        message: "Le nom de l’auteur ne doit contenir que des lettres, espaces ou tirets."
     )]
     #[ORM\Column(length: 255)]
     private ?string $author = null;
