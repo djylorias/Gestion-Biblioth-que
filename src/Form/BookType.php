@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class BookType extends AbstractType
 {
@@ -26,7 +27,15 @@ class BookType extends AbstractType
                 'placeholder' => 'Available',
                 'required' => false,
             ])
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class,[
+                'attr' => ['class' => 'float-left mr-2']
+            ])
+            ->add('cancel', ButtonType::class,[
+                'attr' => [
+                    'class' => 'border bg-white text-black! hover:bg-black! hover:text-white!',
+                    'onclick' => 'window.history.back()'
+                ]
+            ])
         ;
     }
 

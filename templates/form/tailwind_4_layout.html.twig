@@ -6,6 +6,8 @@
 {%- endblock widget_attributes -%}
 
 {%- block button_widget -%}
+    {%- set default_classes = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded hover:cursor-pointer' -%}
+    {%- set merged_classes = (attr.class is defined and attr.class ? default_classes ~ ' ' ~ attr.class : default_classes) -%}
     {%- if label is empty -%}
         {%- if label_format is not empty -%}
             {% set label = label_format|replace({
@@ -16,7 +18,7 @@
             {% set label = name|humanize %}
         {%- endif -%}
     {%- endif -%}
-    <button type="{{ type|default('button') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded hover:cursor-pointer" {{ block('button_attributes') }}>
+    <button type="{{ type|default('button') }}" class="{{ merged_classes }}" {{ block('button_attributes') }}>
         {%- if translation_domain is same as(false) -%}
             {%- if label_html is same as(false) -%}
                 {{- label -}}
