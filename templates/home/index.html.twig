@@ -14,6 +14,26 @@
             <div class="flex flex-col items-center">
                 <twig:Books:Table :books="books" />
             </div> 
+            <div class="flex place-content-between mt-3">
+                {# Previous page button #}
+                {% if page > 1 %}
+                    <a href="{{ path('app_home', {'page': page - 1}) }}" class="flex flex-row gap-2 hover:border-b">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path></svg>
+                        <span>Page précédente</span>
+                    </a>
+                {% else %}
+                    <div></div>
+                {% endif %}
+                {# Next page button #}
+                {% if page < totalPages %}
+                    <a href="{{ path('app_home', {'page': page + 1}) }}" class="flex flex-row gap-2 hover:border-b">
+                        <span>Page suivante</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg>
+                    </a>
+                {% else %}
+                    <div></div>
+                {% endif %}
+            </div>
         </div>
     </div>
 

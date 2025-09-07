@@ -12,12 +12,18 @@ use App\Entity\Book;
 
 final class HomeController extends AbstractController
 {
+
+    private const BOOKS_PER_PAGE = 10;
+
     #[Route('/', name: 'app_home')]
-    public function index(BookRepository $bookRepository): Response
+    public function index(Request $request, BookRepository $bookRepository): Response
     {
-        $books = $bookRepository->getSortedBooks();
+        $page = (int) $request->query->get('page', 1);
+        $books = $bookRepository->getPaginatedBooks($page, self::BOOKS_PER_PAGE);
         return $this->render('home/index.html.twig', [
             'books' => $books,
+            'page' => $page,
+            'totalPages' => ceil($books->count() / self::BOOKS_PER_PAGE)
         ]);
     }
 
