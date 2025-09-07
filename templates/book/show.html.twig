@@ -43,9 +43,14 @@
                 <span class="font-bold text-left text-gray-600">nombre de page : </span>{{ book.nbPages }}
             </div>
 
-            <div class="flex mt-4 gap-4">
-                <a href="{{ path('book.edit', { 'id': book.id }) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded hover:cursor-pointer">Modifier</a>
-                <a href="{{ path('app_home') }}" class="bg-white hover:bg-blue-700 text-blue-500 font-bold py-1 px-2 rounded hover:cursor-pointer hover:text-white border border-blue-500">Retour à la liste</a>
+            <div class="flex place-content-between">
+                <div class="flex mt-4 gap-4">
+                    <a href="{{ path('book.edit', { 'id': book.id }) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded hover:cursor-pointer">Modifier</a>
+                    <a href="{{ path('app_home') }}" class="bg-white hover:bg-blue-700 text-blue-500 font-bold py-1 px-2 rounded hover:cursor-pointer hover:text-white border border-blue-500">Retour à la liste</a>
+                </div>
+                <div class="flex mt-4">
+                    <a href="{{ path('book.delete', { 'id': book.id }) }}" class="text-white bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded hover:cursor-pointer">Supprimer</a>
+                </div>
             </div>
 
         </div>

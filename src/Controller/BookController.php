@@ -60,4 +60,14 @@ final class BookController extends AbstractController
             'form' => $form
         ]);
     }
+
+    #[Route('/delete/{id}', name:'delete')]
+    public function delete(Book $book, EntityManagerInterface $em): Response
+    {
+        $em->remove($book);
+        $em->flush();
+
+        return $this->redirectToRoute('app_home');
+    }
+
 }
