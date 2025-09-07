@@ -33,7 +33,7 @@ final class BookController extends AbstractController
         }
 
         return $this->render('book/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form
         ]);
     }
 
@@ -57,7 +57,7 @@ final class BookController extends AbstractController
         }
         
         return $this->render('book/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form
         ]);
     }
 }
