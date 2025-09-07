@@ -10,27 +10,38 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class BookType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('synopsis')
-            ->add('nb_pages')
-            ->add('author')
+            ->add('title', null, [
+                'label' => 'Titre',
+            ])
+            ->add('synopsis', null, [
+                'label' => 'Synopsis',
+            ])
+            ->add('nb_pages', null, [
+                'label' => 'Nombre de pages',
+            ])
+            ->add('author', null, [
+                'label' => 'Auteur.e',
+                'constraints' => new Length(['min' => 2, 'max' => 255]),
+            ])
             ->add('is_borrowed', EntityType::class, [
+                'label' => 'Emprunté par',
                 'class' => Subscriber::class,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-                'placeholder' => 'Available',
+                'placeholder' => 'Disponible',
                 'required' => false,
             ])
-            ->add('save', SubmitType::class,[
+            ->add('Sauvegarder', SubmitType::class,[
                 'attr' => ['class' => 'float-left mr-2']
             ])
-            ->add('cancel', ButtonType::class,[
+            ->add('Annuler', ButtonType::class,[
                 'attr' => [
                     'class' => 'border bg-white text-black! hover:bg-black! hover:text-white!',
                     'onclick' => 'window.history.back()'
