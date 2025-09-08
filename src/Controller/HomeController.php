@@ -19,7 +19,8 @@ final class HomeController extends AbstractController
     public function index(Request $request, BookRepository $bookRepository): Response
     {
         $page = (int) $request->query->get('page', 1);
-        $books = $bookRepository->getPaginatedBooks($page, self::BOOKS_PER_PAGE);
+        $search = (string) $request->query->get('search', '');
+        $books = $bookRepository->getPaginatedBooks($page, self::BOOKS_PER_PAGE, $search);
         return $this->render('home/index.html.twig', [
             'books' => $books,
             'page' => $page,

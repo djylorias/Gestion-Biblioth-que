@@ -17,15 +17,27 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function getPaginatedBooks(int $page, int $limit): Paginator
+    public function getPaginatedBooks(int $page, int $limit, ?string $search): Paginator
     {
-        return new Paginator($this
-            ->createQueryBuilder('b')
-            ->orderBy('b.title', 'ASC')
-            ->setFirstResult(($page - 1) * $limit)
-            ->setMaxResults($limit),
-            false
-        );
+        if ($search) {
+            return new Paginator($this
+                ->createQueryBuilder('b')
+                ->where('b.title LIKE :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->orderBy('b.title', 'ASC')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit),
+                false
+            );
+        } else {
+            return new Paginator($this
+                ->createQueryBuilder('b')
+                ->orderBy('b.title', 'ASC')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit),
+                false
+            );
+        }
     }
 
     public function getSortedBooks(): array
