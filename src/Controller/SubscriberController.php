@@ -10,15 +10,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 #[Route('/subscriber')]
 final class SubscriberController extends AbstractController
 {
+    const SUBSCRIBERS_PER_PAGE = 10;
+
     #[Route(name: 'app_subscriber_index', methods: ['GET'])]
-    public function index(SubscriberRepository $subscriberRepository): Response
+    public function index(SubscriberRepository $subscriberRepository, Request $request): Response
     {
+        $page = (int) $request->query->get('page', 1);
+        $limit = (int) $request->query->get('limit', self::SUBSCRIBERS_PER_PAGE);
+        $search = $request->query->get('search');
+
+        $subscribers = $subscriberRepository->getPaginatedSubscribers($page, $limit, $search);
+
         return $this->render('subscriber/index.html.twig', [
-            'subscribers' => $subscriberRepository->findAll(),
+            'subscribers' => $subscribers,
+            'page' => $page,
+            'totalPages' => ceil($subscribers->count() / self::SUBSCRIBERS_PER_PAGE),
         ]);
     }
 

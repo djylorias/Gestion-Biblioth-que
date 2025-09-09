@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Subscriber;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @extends ServiceEntityRepository<Subscriber>
@@ -14,6 +15,31 @@ class SubscriberRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Subscriber::class);
+    }
+
+    public function getPaginatedSubscribers(int $page, int $limit, ?string $search): Paginator
+    {
+        if ($search) {
+            return new Paginator($this
+                ->createQueryBuilder('s')
+                ->where('s.firstname LIKE :search OR s.lastname LIKE :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->orderBy('s.firstname', 'ASC')
+                ->orderBy('s.lastname', 'ASC')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit),
+                false
+            );
+        } else {
+            return new Paginator($this
+                ->createQueryBuilder('s')
+                ->orderBy('s.firstname', 'ASC')
+                ->orderBy('s.lastname', 'ASC')
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit),
+                false
+            );
+        }
     }
 
 //    /**
