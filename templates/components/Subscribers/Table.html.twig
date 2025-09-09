@@ -1,0 +1,12 @@
+<table {{ attributes.defaults({class: 'max-w-2xl'}) }}>
+    <twig:table:head :headers="['Nom', 'Email', 'Nombre de livres empruntés']" />
+    <tbody>
+        {% for subscriber in subscribers %}
+            <tr class="border-b-1 border-gray-300 py-2 hover:bg-gray-100">
+                <td class="p-1"><a class="hover:underline" href="{{ path('app_subscriber_show', { 'id': subscriber.id }) }}">{{ subscriber.fullname }}</a></td>
+                <td class="p-1">{{ subscriber.email }}</td>
+                <td class="p-1">{{ subscriber.borrowedBooksCount() }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -14,7 +14,8 @@ create-database:
 	php bin/console doctrine:database:create
 
 generate-migrations:
-	php bin/console make:migration --no-interaction
+	mkdir -p ./migrations
+	php bin/console make:migration
 
 generate-tables:
 	php bin/console doctrine:migrations:migrate --no-interaction

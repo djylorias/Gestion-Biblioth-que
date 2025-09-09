@@ -33,7 +33,7 @@ class BookType extends AbstractType
             ->add('is_borrowed', EntityType::class, [
                 'label' => 'Emprunté par',
                 'class' => Subscriber::class,
-                'choice_label' => 'name',
+                'choice_label' => 'fullname',
                 'choice_value' => 'id',
                 'placeholder' => 'Disponible',
                 'required' => false,
