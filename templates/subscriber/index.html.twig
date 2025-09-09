@@ -9,7 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,7 +19,9 @@
         {% for subscriber in subscribers %}
             <tr>
                 <td>{{ subscriber.id }}</td>
-                <td>{{ subscriber.name }}</td>
+                <td>{{ subscriber.firstname }}</td>
+                <td>{{ subscriber.lastname }}</td>
+                <td>{{ subscriber.email }}</td>
                 <td>
                     <a href="{{ path('app_subscriber_show', {'id': subscriber.id}) }}">show</a>
                     <a href="{{ path('app_subscriber_edit', {'id': subscriber.id}) }}">edit</a>
@@ -25,7 +29,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

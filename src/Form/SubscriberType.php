@@ -12,7 +12,9 @@ class SubscriberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('firstname')
+            ->add('lastname')
+            ->add('email')
         ;
     }
 

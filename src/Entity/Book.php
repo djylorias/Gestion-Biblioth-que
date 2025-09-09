@@ -113,7 +113,7 @@ class Book
     public function availability(): string
     {
         if($this->is_borrowed) {
-            return '<span class="text-red-700">Emprunté par ' . $this->is_borrowed->getName() . '</span>';
+            return '<span class="text-red-700">Emprunté par ' . $this->is_borrowed->getFirstname() . ' ' . $this->is_borrowed->getLastname() . '</span>';
         }
         return '<span class="text-green-700">Disponible</span>';
     }
