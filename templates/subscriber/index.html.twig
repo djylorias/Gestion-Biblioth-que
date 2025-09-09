@@ -1,26 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'accueil{% endblock %}
+{% block title %}Subscriber index{% endblock %}
 
 {% block body %}
-
     <div class="flex flex-col items-center">
         <div>
-            <h1 class="mb-4">Bienvenue dans le gestionnaire de votre bibliothèque ! Cliquez sur le titre d'un livre pour le visualiser.</h1>
+            <h1 class="mb-4">Liste des abonnés</h1>
             <div class="flex mb-4">
-                <a href="{{ path('book.create') }}" class="flex flex-row text-center bg-blue-300 py-1 px-3 rounded-md max-w-fit hover:bg-blue-400">
+                <a href="{{ path('app_subscriber_new') }}" class="flex flex-row text-center bg-blue-300 py-1 px-3 rounded-md max-w-fit hover:bg-blue-400">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M222,128a6,6,0,0,1-6,6H134v82a6,6,0,0,1-12,0V134H40a6,6,0,0,1,0-12h82V40a6,6,0,0,1,12,0v82h82A6,6,0,0,1,222,128Z"></path></svg>
-                    <span class="pl-1">Ajouter un livre</span>
+                    <span class="pl-1">Ajouter un abonné</span>
                 </a>
                 <form class="border border-gray-300 rounded-md ml-4 px-2 flex">
-                    <input type="text" name="search" placeholder="Rechercher un livre..." value="{{ app.request.get('search') }}" class="focus:outline-0">
+                    <input type="text" name="search" placeholder="Rechercher un abonné..." value="{{ app.request.get('search') }}" class="focus:outline-0">
                     <button type="submit" class="hover:cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#000000" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>
                     </button>
                 </form>
             </div>
             <div class="flex flex-col items-center">
-                <twig:Books:Table :books="books" />
+                <twig:Subscribers:Table :subscribers="subscribers" />
             </div> 
             <div class="flex place-content-between mt-3">
                 {# Previous page button #}
@@ -44,5 +43,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

@@ -14,7 +14,8 @@ create-database:
 	php bin/console doctrine:database:create
 
 generate-migrations:
-	php bin/console make:migration --no-interaction
+	mkdir -p ./migrations
+	php bin/console make:migration
 
 generate-tables:
 	php bin/console doctrine:migrations:migrate --no-interaction
@@ -25,7 +26,12 @@ generate-fixtures:
 start: install database
 	php -S localhost:8000 -t public
 
+start-dev: install database-dev
+	php -S localhost:8000 -t public -d variables_order=EGPCS
+
 symfony-version:
 	php bin/console --version
 
-database: create-database generate-migrations generate-tables generate-fixtures
+database-dev: create-database generate-migrations generate-tables generate-fixtures
+
+database: create-database generate-tables

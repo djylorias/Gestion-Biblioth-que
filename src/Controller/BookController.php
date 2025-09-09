@@ -11,10 +11,33 @@ use App\Repository\BookRepository;
 use App\Form\BookType;
 use App\Entity\Book;
 
+#[Route('/book', name: 'book.')]
 final class BookController extends AbstractController
 {
 
-    #[Route('/book/{id}', name:'book.show')]
+    #[Route('/new', name:'create')]
+    public function create(Request $request, EntityManagerInterface $em): Response
+    {
+        $book = new Book();
+        $form = $this->createForm(BookType::class, $book);
+        $form->handleRequest($request);
+        
+        if($form->getClickedButton() && $form->getClickedButton()->getName() === 'cancel') {
+            return $this->redirectToRoute('app_home');
+        }
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($book);
+            $em->flush();
+            return $this->redirectToRoute('app_home');
+        }
+
+        return $this->render('book/edit.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/{id}', name:'show')]
     public function show(Book $book): Response
     {
         return $this->render('book/show.html.twig', [
@@ -22,7 +45,7 @@ final class BookController extends AbstractController
         ]);
     }
 
-    #[Route('/book/edit/{id}', name:'book.edit')]
+    #[Route('/edit/{id}', name:'edit')]
     public function edit(Book $book, Request $request, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(BookType::class, $book);
@@ -37,4 +60,14 @@ final class BookController extends AbstractController
             'form' => $form
         ]);
     }
+
+    #[Route('/delete/{id}', name:'delete')]
+    public function delete(Book $book, EntityManagerInterface $em): Response
+    {
+        $em->remove($book);
+        $em->flush();
+
+        return $this->redirectToRoute('app_home');
+    }
+
 }

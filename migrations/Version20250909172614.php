@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250901112503 extends AbstractMigration
+final class Version20250909172614 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,9 +20,10 @@ final class Version20250901112503 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE book (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, is_borrowed_id INTEGER DEFAULT NULL, title VARCHAR(255) NOT NULL, synopsis CLOB DEFAULT NULL, nb_pages SMALLINT NOT NULL, author VARCHAR(255) NOT NULL, CONSTRAINT FK_CBE5A331B5DA541D FOREIGN KEY (is_borrowed_id) REFERENCES subscriber (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
-        $this->addSql('CREATE INDEX IDX_CBE5A331B5DA541D ON book (is_borrowed_id)');
-        $this->addSql('CREATE TABLE subscriber (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE TABLE book (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, borrower_id INTEGER DEFAULT NULL, title VARCHAR(255) NOT NULL, synopsis CLOB DEFAULT NULL, nb_pages SMALLINT NOT NULL, author VARCHAR(255) NOT NULL, CONSTRAINT FK_CBE5A33111CE312B FOREIGN KEY (borrower_id) REFERENCES subscriber (id) ON DELETE SET NULL NOT DEFERRABLE INITIALLY IMMEDIATE)');
+        $this->addSql('CREATE INDEX IDX_CBE5A33111CE312B ON book (borrower_id)');
+        $this->addSql('CREATE TABLE subscriber (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_AD005B69E7927C74 ON subscriber (email)');
         $this->addSql('CREATE TABLE messenger_messages (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, body CLOB NOT NULL, headers CLOB NOT NULL, queue_name VARCHAR(190) NOT NULL, created_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         , available_at DATETIME NOT NULL --(DC2Type:datetime_immutable)
         , delivered_at DATETIME DEFAULT NULL --(DC2Type:datetime_immutable)

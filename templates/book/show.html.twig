@@ -4,27 +4,57 @@
 
 {% block body %}
 
-    <h1 class="text-2xl font-bold">Ajouter un nouveau livre</h1>
+    <div class="mt-5 flex flex-col items-center w-auto h-auto">
 
-    <br><br>
+        <div class=" flex flex-col gap-2">
 
-    <div>
+            <div class="">
+                <h1 class="font-bold text-3xl">{{ book.title }}</h1>
+            </div>
 
-        <span class="font-bold">Etat : </span>{{ book.availability()|raw }}
+            <div class="w-auto h-px bg-gray-300"></div>
+            
+            <div class="flex gap-2 justify-center">
 
-        <h1 class="font-bold">{{ book.title }}</h1>
+                <div class="flex flex-col flex-1">
+                    <span class="font-bold text-left text-gray-600">État : </span>
+                    {{ book.availability()|raw }}
+                </div>
 
-        <h2>{{ book.author }}</h2>
+                <div class="h-auto w-px bg-gray-300"></div>
 
-        <p>{{ book.synopsis }}</p>
+                <div class="flex flex-col flex-1">
+                    <span class="font-bold text-left text-gray-600">Auteur : </span>
+                    {{ book.author }}
+                </div>
 
-        <span class="font-bold">nombre de page : </span>{{ book.nbPages }}
+            </div>
 
-    </div>
+            <div class="w-auto h-px bg-gray-300"></div>
 
-    <div class="flex mt-4 gap-8">
-        <a href="{{ path('book.edit', { 'id': book.id }) }}" class="btn btn-primary">Modifier</a>
-        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour à la liste</a>
+            <div class="flex flex-col">
+                <span class="font-bold text-left text-gray-600">Synopsis : </span>
+                <p>{{ book.synopsis }}</p>
+            </div>
+
+            <div class="w-auto h-px bg-gray-300"></div>
+
+            <div class="flex gap-3">
+                <span class="font-bold text-left text-gray-600">nombre de page : </span>{{ book.nbPages }}
+            </div>
+
+            <div class="flex place-content-between">
+                <div class="flex mt-4 gap-4">
+                    <a href="{{ path('book.edit', { 'id': book.id }) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded hover:cursor-pointer">Modifier</a>
+                    <a href="{{ path('app_home') }}" class="bg-white hover:bg-blue-700 text-blue-500 font-bold py-1 px-2 rounded hover:cursor-pointer hover:text-white border border-blue-500">Retour à la liste</a>
+                </div>
+                <div class="flex mt-4">
+                    <a href="{{ path('book.delete', { 'id': book.id }) }}" class="text-white bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded hover:cursor-pointer">Supprimer</a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 {% endblock %}
