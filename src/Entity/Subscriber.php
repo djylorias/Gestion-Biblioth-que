@@ -6,8 +6,14 @@ use App\Repository\SubscriberRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: SubscriberRepository::class)]
+#[UniqueEntity(
+    fields: ['email'],
+    message: 'Cette adresse email est déjà utilisée par un autre abonné.'
+)]
 class Subscriber
 {
     #[ORM\Id]
@@ -21,13 +27,22 @@ class Subscriber
     #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'is_borrowed')]
     private Collection $books;
 
+    #[Assert\Regex(
+        pattern: "/^[\p{L}\s\-]+$/u",
+        message: "Le prénom ne peut contenir que des lettres, espaces ou tirets."
+    )]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
+    #[Assert\Regex(
+        pattern: "/^[\p{L}\s\-]+$/u",
+        message: "Le nom ne peut contenir que des lettres, espaces ou tirets."
+    )]
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 255)]
+    #[Assert\Email(message: "l'email {{ value }} n'est pas un email valide.")]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $email = null;
 
     public function __construct()
