@@ -34,6 +34,7 @@ php -S localhost:8000 -t public # Démarre le serveur en local
 - [Composer](https://getcomposer.org/) 2.8
 - [Symfony](https://symfony.com/) 7.3
 - [SQLite](https://sqlite.org/) 3.4
+- [Tailwind](https://tailwindcss.com/) 4.1
 
 
 ## Auteur
