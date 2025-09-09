@@ -6,6 +6,8 @@ use App\Entity\Subscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 
 class SubscriberType extends AbstractType
 {
@@ -14,7 +16,9 @@ class SubscriberType extends AbstractType
         $builder
             ->add('firstname')
             ->add('lastname')
-            ->add('email')
+            ->add('email')->add('Sauvegarder', SubmitType::class,[
+                'attr' => ['class' => 'float-left mr-2']
+            ])
         ;
     }
 

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Subscriber{% endblock %}
+{% block title %}Créer un nouvel abonné{% endblock %}
 
 {% block body %}
-    <h1>Create new Subscriber</h1>
+    <h1>Créer un nouvel abonné</h1>
 
     {{ include('subscriber/_form.html.twig') }}
 
-    <a href="{{ path('app_subscriber_index') }}">back to list</a>
+    <button onclick="window.history.back()" class="border bg-white text-black! hover:bg-black! hover:text-white! font-bold py-2 px-4 rounded hover:cursor-pointer">Annuler</button>
 {% endblock %}
