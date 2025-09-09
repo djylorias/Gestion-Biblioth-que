@@ -14,7 +14,7 @@ class Subscriber
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-    
+
     /**
      * @var Collection<int, Book>
      */
@@ -38,18 +38,6 @@ class Subscriber
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -117,4 +105,16 @@ class Subscriber
 
         return $this;
     }
+
+    // Return the full name of the subscriber as "firstname lastname"
+    public function getFullname(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function getBorrowedBooksCount(): int
+    {
+        return $this->books->count();
+    }
+
 }
