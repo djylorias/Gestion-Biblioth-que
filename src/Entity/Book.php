@@ -28,6 +28,12 @@ class Book
     private ?int $nb_pages = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
+    #[ORM\JoinColumn(
+        name: 'borrower_id',
+        referencedColumnName: 'id',
+        nullable: true,
+        onDelete: 'SET NULL'
+    )]
     private ?Subscriber $is_borrowed = null;
 
     #[Assert\NotBlank(message: "Le nom de l’auteur doit être renseigné.")]
