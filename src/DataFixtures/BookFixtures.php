@@ -13,6 +13,8 @@ use Faker\Factory;
 class BookFixtures extends Fixture implements DependentFixtureInterface
 {
 
+    private const BOOK_FIXTURES_QUANTITY = 50;
+
     private $faker;
     private $subscribers;
 
@@ -23,7 +25,7 @@ class BookFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $this->subscribers = $manager->getRepository(Subscriber::class)->findAll();
-        $this->generateBooks(50, $manager);
+        $this->generateBooks(self::BOOK_FIXTURES_QUANTITY, $manager);
         $manager->flush();
     }
 

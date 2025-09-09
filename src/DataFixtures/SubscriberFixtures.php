@@ -9,6 +9,9 @@ use Faker\Factory;
 
 class SubscriberFixtures extends Fixture
 {
+
+    private const SUBSCRIBER_FIXTURES_QUANTITY = 20;
+
     private $faker;
     private $subscribers;
 
@@ -26,7 +29,7 @@ class SubscriberFixtures extends Fixture
             ->setEmail('ludo.bernard59320@gmail.com');
         $manager->persist($subscriber);
 
-        $this->generateSubscribers(5, $manager);
+        $this->generateSubscribers(self::SUBSCRIBER_FIXTURES_QUANTITY, $manager);
 
         $manager->flush();
     }
