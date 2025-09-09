@@ -42,3 +42,29 @@ php -S localhost:8000 -t public # Démarre le serveur en local
 Ludovic BERNARD, diplômé d'un BUT Informatique à l'IUT A de Lille.
 
 Le projet a été débuté le 30 août 2025.
+
+
+## Base de données et entités
+
+Pour que le projet soit "portable" et simple d'utilisation, j'ai décidé d'utiliser SQLite.
+
+Voici les entités du projet:
+
+- 'Subscriber' (Une personne étant abonné à la librairie - qui peut emprunter des livres)
+
+|Colonne|Type|
+|-------|----|
+|firstname|varchar(255)|
+|lastname|varchar(255)|
+|email|varchar(255), unique|
+
+- 'Book' (Un livre de la bibliothèque - qu'un abonné peut emprunté si disponible)
+
+|Colonne|Type|
+|-------|----|
+|title|varchar(255)|
+|synopsys|text|
+|nb_pages|smallint|
+|author|varchar(255)|
+|borrower_id|ManyToOne(inversedBy: 'books'), on delete set null|
+
